@@ -573,14 +573,12 @@ angular.module('mentio', [])
                 );
 
                 scope.$watch('items', function (items) {
+                    if (!scope.visible && scope.requestVisiblePendingSearch) {
+                        scope.visible = true;
+                        scope.requestVisiblePendingSearch = false;
+                    }
                     if (items && items.length > 0) {
                         scope.activate(items[0]);
-                        if (!scope.visible && scope.requestVisiblePendingSearch) {
-                            scope.visible = true;
-                            scope.requestVisiblePendingSearch = false;
-                        }
-                    } else {
-                        scope.hideMenu();
                     }
                 });
 
